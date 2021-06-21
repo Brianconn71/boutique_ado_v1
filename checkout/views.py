@@ -62,7 +62,7 @@ def checkout(request):
             request.session['save_info'] = 'save-info' in request.POST
             return redirect(reverse('checkout_success', args=[order.order_number]))
         else:
-            messages.error(request, 'There was an error with your form\n Please double check your information')
+            messages.error(request, 'There was an error with your form\ Please double check your information')
     else:
         bag = request.session.get('bag', {})
         if not bag:
@@ -97,8 +97,7 @@ def checkout_success(request, order_number):
     """
     save_info = request.session.get('save_info')
     order = get_object_or_404(Order, order_number=order_number)
-    messages.success(request, f'Order Successfully created\n 
-    Your order number is {order.number}. A confirmation\n email will be sent to {order.email}')
+    messages.success(request, f'Order Successfully created. Your order number is {order_number}. A confirmation\n email will be sent to {order.email}')
 
     if 'bag' in request.session:
         del request.session['bag']
